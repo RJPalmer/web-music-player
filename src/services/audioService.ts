@@ -6,10 +6,6 @@ class AudioService {
     this.audio.src = trackUrl;
     this.audio.load();
   }
-  getDuration(): number | undefined {
-    return this.audio.duration || 0;
-  }
-  private audio: HTMLAudioElement;
 
   constructor() {
     this.audio = new Audio();
@@ -19,7 +15,7 @@ class AudioService {
       usePlayerStore.setState({ currentTime: this.audio.currentTime });
     });
 
-    this.audio.addEventListener("loadeddata", () => {
+    this.audio.addEventListener("loadedmetadata", () => {
       usePlayerStore.setState({ duration: this.audio.duration });
     });
 
@@ -29,8 +25,12 @@ class AudioService {
   }
 
 
-  play() {
-    this.audio.play();
+  async play() {
+   try {
+     await this.audio.play();
+   } catch (error) {
+    console.error("Failed to play audio:", error);
+   }
   }
 
   pause() {
