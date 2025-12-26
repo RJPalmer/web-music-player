@@ -1,16 +1,17 @@
 import { create } from 'zustand'
 import { audioService } from '../services/audioService'
+import type { Track } from '../types/Track'
 
 type PlayerState = {
   isPlaying: boolean
   volume: number
   currentTime: number
   duration: number
-  src: string | null
+  src: Track | null
 
 
-  setTrack: (trackUrl: string) => void
-  loadTrack: (trackUrl: string) => void
+  setTrack: (track: Track) => void
+  loadTrack: (track: Track) => void
   play: () => void
   pause: () => void
   seek: (time: number) => void
@@ -24,12 +25,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   duration: 0,
   src: null,
 
-  setTrack: (trackUrl) => {
-    audioService.loadTrack(trackUrl)
-    set({ src: trackUrl, currentTime: 0 })
+  setTrack: (track) => {
+    audioService.loadTrack(track)
+    set({ src: track, currentTime: 0 })
   },
-  loadTrack: (trackUrl) => {
-    audioService.loadTrack(trackUrl)
+  loadTrack: (track) => {
+    audioService.loadTrack(track)
     set({ duration: audioService.duration})
     set({ currentTime: 0 })
   },
@@ -41,8 +42,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     const { src } = get()
 
     if (!src) {
-      audioService.loadTrack('file_example_MP3_700KB.mp3')
-      set({ src: 'file_example_MP3_700KB.mp3' })
+      // No track selected yet; do nothing
+      return
     }
 
     await audioService.play()

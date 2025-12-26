@@ -1,11 +1,12 @@
 import { create } from 'zustand'
 import { usePlayerStore } from './usePlayerStore'
+import type { Track } from '../types/Track'
 
 type QueueState = {
-  tracks: string[]
+  tracks: Track[]
   currentIndex: number
 
-  setQueue: (tracks: string[], startIndex?: number) => void
+  setQueue: (tracks: Track[], startIndex?: number) => void
   next: () => void
   previous: () => void
 }

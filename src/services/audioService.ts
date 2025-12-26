@@ -1,9 +1,10 @@
 import { usePlayerStore } from "../stores/usePlayerStore";
+import type { Track } from "../types/Track";
 
 class AudioService {
   private audio: HTMLAudioElement;
-  loadTrack(trackUrl: string) {
-    this.audio.src = trackUrl;
+  loadTrack(track: Track) {
+    this.audio.src = track.src;
     this.audio.load();
 
     if ("mediaSession" in navigator) {
