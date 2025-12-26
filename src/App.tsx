@@ -1,6 +1,7 @@
 import { usePlayerStore } from './stores/usePlayerStore'
 import { useQueueStore } from './stores/useQueueStore'
 import { NowPlaying } from './components/NowPlaying'
+import { QueueList } from './components/QueueList'
 import type { Track } from './types/Track'
 
 
@@ -33,7 +34,7 @@ function App() {
       <h1>Web Music Player</h1>
 
       <NowPlaying />
-
+      <QueueList />
       <div style={{ height: 20 }} />
       <button onClick={isPlaying ? pause : play}>
         {isPlaying ? 'Pause' : 'Play'}
@@ -57,6 +58,7 @@ function App() {
           onChange={(e) => seek(Number(e.target.value))}
         />
       </div>
+      
       <div>
         <label>Volume</label>
         <input

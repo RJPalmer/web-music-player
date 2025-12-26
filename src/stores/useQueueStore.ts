@@ -9,6 +9,7 @@ type QueueState = {
   setQueue: (tracks: Track[], startIndex?: number) => void
   next: () => void
   previous: () => void
+  select: (index: number) => void
 }
 
 export const useQueueStore = create<QueueState>((set, get) => ({
@@ -43,6 +44,15 @@ export const useQueueStore = create<QueueState>((set, get) => ({
 
     set({ currentIndex: prevIndex })
     usePlayerStore.getState().setTrack(tracks[prevIndex])
+    usePlayerStore.getState().play()
+  },
+
+  select: (index: number) => {
+    const { tracks } = get()
+    if(!tracks[index]) return
+
+    set({ currentIndex: index })
+    usePlayerStore.getState().setTrack(tracks[index])
     usePlayerStore.getState().play()
   }
 }))
