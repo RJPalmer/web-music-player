@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { usePlayerStore } from './stores/usePlayerStore'
 import { useQueueStore } from './stores/useQueueStore'
 import { NowPlaying } from './components/NowPlaying'
@@ -29,6 +30,12 @@ function App() {
     artist: 'Local Artist'
   }
 ]
+
+  useEffect(() => {
+    // Load demo tracks into the queue on mount
+    useQueueStore.getState().rehydrate()
+  }, [])
+
   return (
     <div style={{ padding: 20 }}>
       <h1>Web Music Player</h1>

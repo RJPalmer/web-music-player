@@ -9,6 +9,10 @@ export function NowPlaying() {
 
   const next = useQueueStore((state) => state.next)
   const previous = useQueueStore((state) => state.previous)
+  const shuffle = useQueueStore((state) => state.shuffle)
+const toggleShuffle = useQueueStore((state) => state.toggleShuffle)
+const repeat = useQueueStore((state) => state.repeat)
+const toggleRepeat = useQueueStore((state) => state.toggleRepeat)
 
   if (!track) {
     return <div><strong>Nothing playing</strong></div>
@@ -42,6 +46,24 @@ export function NowPlaying() {
         </button>
         <button onClick={next}>⏭</button>
       </div>
+
+      <button
+  onClick={toggleShuffle}
+  style={{
+    border: shuffle ? '2px solid #000' : 'none'
+  }}
+>
+  🔀
+</button>
+
+    <button
+  onClick={toggleRepeat}
+  style={{ fontWeight: repeat !== 'none' ? 'bold' : 'normal' }}
+>
+  {repeat === 'none' && '🔁'}
+  {repeat === 'all' && '🔁'}
+  {repeat === 'one' && '🔂'}
+</button>
     </div>
   )
 }
