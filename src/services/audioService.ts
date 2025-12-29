@@ -3,25 +3,18 @@ import type { Track } from "../types/Track";
 
 class AudioService {
   private audio: HTMLAudioElement;
-  loadTrack(track: Track) {
-    this.audio.src = track.src;
-    this.audio.load();
-
-    if ("mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: "Test Track",
-        artist: "Local Library",
-        album: "Web Music Player",
-      });
-    }
-  }
 
   constructor() {
     this.audio = new Audio();
     this.audio.preload = "metadata";
 
+    // Debounced persistence of currentTime (save every ~1s if changed)
     this.audio.addEventListener("timeupdate", () => {
-      usePlayerStore.setState({ currentTime: this.audio.currentTime });
+      const time = Math.floor(this.audio.currentTime);
+      const last = usePlayerStore.getState().currentTime;
+      if (time !== Math.floor(last)) {
+        usePlayerStore.setState({ currentTime: this.audio.currentTime });
+      }
     });
 
     this.audio.addEventListener("loadedmetadata", () => {
@@ -70,14 +63,25 @@ class AudioService {
         });
       });
 
-        navigator.mediaSession.setActionHandler("previoustrack", () => {
-            import("../stores/useQueueStore").then(({ useQueueStore }) => {
-            useQueueStore.getState().previous();
-            });
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
+        import("../stores/useQueueStore").then(({ useQueueStore }) => {
+          useQueueStore.getState().previous();
         });
+      });
     }
   }
+  loadTrack(track: Track) {
+    this.audio.src = track.src;
+    this.audio.load();
 
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: "Test Track",
+        artist: "Local Library",
+        album: "Web Music Player",
+      });
+    }
+  }
   async play() {
     try {
       await this.audio.play();
@@ -119,4 +123,7 @@ class AudioService {
   }
 }
 
+export function getCurrentTime(){
+    return audioService.currentTime;
+}
 export const audioService = new AudioService();
