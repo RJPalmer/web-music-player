@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { usePlayerStore } from "./usePlayerStore";
 import { savePlayerState, loadPlayerState } from "../persistence/playerStorage";
 import type { Track } from "../types/Track";
+import { setMediaSessionMetadata } from "../services/mediaSession";
 
 type QueueState = {
   tracks: Track[];
@@ -123,7 +124,8 @@ export const useQueueStore = create<QueueState>((set, get) => ({
 
   const track = persisted.tracks[persisted.currentIndex]
   if (track) {
-    usePlayerStore.getState().setTrack(track)
+   usePlayerStore.getState().setTrack(track)
+    setMediaSessionMetadata(track)
   }
   }
 }));

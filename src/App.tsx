@@ -3,6 +3,7 @@ import { usePlayerStore } from './stores/usePlayerStore'
 import { useQueueStore } from './stores/useQueueStore'
 import { NowPlaying } from './components/NowPlaying'
 import { QueueList } from './components/QueueList'
+import { registerMediaSessionHandlers } from './services/mediaSession'
 import type { Track } from './types/Track'
 
 
@@ -34,6 +35,8 @@ function App() {
   useEffect(() => {
     // Load demo tracks into the queue on mount
     useQueueStore.getState().rehydrate()
+    registerMediaSessionHandlers()
+
   }, [])
 
   return (

@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { audioService } from '../services/audioService'
 import type { Track } from '../types/Track'
+import { setMediaSessionMetadata } from '../services/mediaSession'
 
 type PlayerState = {
   isPlaying: boolean
@@ -28,6 +29,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   setTrack: (track) => {
     audioService.loadTrack(track)
     set({ src: track, currentTime: 0 })
+    setMediaSessionMetadata(track)
   },
   loadTrack: (track) => {
     audioService.loadTrack(track)
