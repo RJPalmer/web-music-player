@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# Web Music Player
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, web-based music player built with React, TypeScript, and Vite. This application allows users to upload, organize, and play their music files directly in the browser with a clean, intuitive interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **File Upload**: Drag and drop music files or use the upload button to add tracks to your library
+- **Audio Playback**: Play, pause, skip forward/backward, and control volume
+- **Queue Management**: Add tracks to a queue, reorder, and manage playback order
+- **Keyboard Controls**: Use keyboard shortcuts for common actions (play/pause, skip, volume)
+- **Persistent State**: Your player settings, queue, and library are saved across sessions
+- **Media Session Integration**: Control playback through browser media keys and notifications
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Library Organization**: Browse and manage your uploaded tracks
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React**: UI framework for building the user interface
+- **TypeScript**: Type-safe JavaScript for better development experience
+- **Vite**: Fast build tool and development server
+- **Zustand**: State management for React
+- **Tailwind CSS**: Utility-first CSS framework (if applicable, based on styles)
+- **ESLint**: Code linting and formatting
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/RJPalmer/web-music-player.git
+   cd web-music-player
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Usage
+
+1. **Upload Music**: Click the upload button or drag and drop audio files (MP3, WAV, etc.) into the drop zone
+2. **Play Tracks**: Click on any track in your library to start playing
+3. **Control Playback**: Use the now playing controls to play/pause, skip, and adjust volume
+4. **Manage Queue**: Add tracks to the queue and reorder them as needed
+5. **Keyboard Shortcuts**:
+   - Space: Play/Pause
+   - Arrow Left/Right: Previous/Next track
+   - Arrow Up/Down: Volume up/down
+
+## Development
+
+### Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the project for production
+- `npm run preview` - Preview the production build locally
+- `npm run lint` - Run ESLint for code quality checks
+
+### Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── DropZone.tsx    # File upload area
+│   ├── NowPlaying.tsx  # Current track display and controls
+│   └── QueueList.tsx   # Queue management interface
+├── features/           # Feature-specific modules
+│   └── uploads/        # File upload functionality
+├── hooks/              # Custom React hooks
+├── persistence/        # Data persistence utilities
+├── services/           # External service integrations
+├── stores/             # Zustand state stores
+├── types/              # TypeScript type definitions
+└── utils/              # Utility functions
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Contributing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
