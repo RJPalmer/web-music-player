@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { usePlayerStore } from './stores/usePlayerStore'
 import { useQueueStore } from './stores/useQueueStore'
+import { DropZone } from './components/DropZone'
 import { NowPlaying } from './components/NowPlaying'
 import { UploadButton } from './features/uploads/UploadButton'
 import { QueueList } from './components/QueueList'
@@ -41,11 +42,12 @@ function App() {
   }, [])
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Web Music Player</h1>
-      <UploadButton />
-      <NowPlaying />
-      <QueueList />
+    <DropZone>
+      <div style={{ padding: 20 }}>
+        <h1>Web Music Player</h1>
+        <UploadButton />
+        <NowPlaying />
+        <QueueList />
       <div style={{ height: 20 }} />
       <button onClick={isPlaying ? pause : play}>
         {isPlaying ? 'Pause' : 'Play'}
@@ -82,6 +84,7 @@ function App() {
         />
       </div>
     </div>
+    </DropZone>
   )
 }
 
