@@ -17,6 +17,7 @@ type PlayerState = {
   pause: () => void
   togglePlay: () => void
   seek: (time: number) => void
+  seekBy: (delta: number) => void
   setVolume: (volume: number) => void
 }
 
@@ -40,6 +41,16 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   seek: (time) => {
     audioService.seek(time)
     set({ currentTime: time })
+  },
+  seekBy: (delta) => {
+    const { currentTime, duration } = get()
+    const nextTime = Math.min(
+      Math.max(currentTime + delta, 0),
+      duration || currentTime
+    )
+
+    audioService.seek(nextTime)
+    set({ currentTime: nextTime })
   },
   play: async () => {
     const { src } = get()

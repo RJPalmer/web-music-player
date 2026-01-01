@@ -4,6 +4,7 @@ import { useQueueStore } from "../stores/useQueueStore";
 
 export function useKeyboardControls() {
   const togglePlay = usePlayerStore((s) => s.togglePlay);
+  const seekBy = usePlayerStore((s) => s.seekBy);
   const next = useQueueStore((s) => s.next);
   const previous = useQueueStore((s) => s.previous);
 
@@ -26,11 +27,23 @@ export function useKeyboardControls() {
           break;
 
         case "ArrowRight":
-          next();
+          if (e.shiftKey) {
+            seekBy(10);
+          } else if (e.altKey || e.metaKey) {
+            seekBy(30);
+          } else {
+            next();
+          }
           break;
 
         case "ArrowLeft":
-          previous();
+          if (e.shiftKey) {
+            seekBy(-10);
+          } else if (e.altKey || e.metaKey) {
+            seekBy(-30);
+          } else {
+            previous();
+          }
           break;
 
         case "KeyK":
@@ -47,5 +60,6 @@ export function useKeyboardControls() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [togglePlay, next, previous]);
+  }, [togglePlay, next, previous, seekBy]);
 }
+    
