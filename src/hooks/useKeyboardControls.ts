@@ -1,41 +1,51 @@
-import { useEffect } from 'react'
-import { usePlayerStore } from '../stores/usePlayerStore'
-import { useQueueStore } from '../stores/useQueueStore'
+import { useEffect } from "react";
+import { usePlayerStore } from "../stores/usePlayerStore";
+import { useQueueStore } from "../stores/useQueueStore";
 
 export function useKeyboardControls() {
-  const togglePlay = usePlayerStore((s) => s.togglePlay)
-  const next = useQueueStore((s) => s.next)
-  const previous = useQueueStore((s) => s.previous)
+  const togglePlay = usePlayerStore((s) => s.togglePlay);
+  const next = useQueueStore((s) => s.next);
+  const previous = useQueueStore((s) => s.previous);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       // Ignore typing in inputs / textareas
-      const target = e.target as HTMLElement
+      const target = e.target as HTMLElement;
       if (
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
         target.isContentEditable
       ) {
-        return
+        return;
       }
 
       switch (e.code) {
-        case 'Space':
-          e.preventDefault()
-          togglePlay()
-          break
+        case "Space":
+          e.preventDefault();
+          togglePlay();
+          break;
 
-        case 'ArrowRight':
-          next()
-          break
+        case "ArrowRight":
+          next();
+          break;
 
-        case 'ArrowLeft':
-          previous()
-          break
+        case "ArrowLeft":
+          previous();
+          break;
+
+        case "KeyK":
+          togglePlay();
+          break;
+        case "KeyL":
+          next();
+          break;
+        case "KeyJ":
+          previous();
+          break;
       }
     }
 
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [togglePlay, next, previous])
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [togglePlay, next, previous]);
 }
