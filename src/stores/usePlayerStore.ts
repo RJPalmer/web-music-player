@@ -15,6 +15,7 @@ type PlayerState = {
   loadTrack: (track: Track) => void
   play: () => void
   pause: () => void
+  togglePlay: () => void
   seek: (time: number) => void
   setVolume: (volume: number) => void
 }
@@ -54,6 +55,19 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   pause: () => {
     audioService.pause()
     set({ isPlaying: false })
+  },
+  togglePlay: () => {
+    const { isPlaying, src } = get()
+
+    if (!src) return
+
+    if (isPlaying) {
+      audioService.pause()
+      set({ isPlaying: false })
+    } else {
+      audioService.play()
+      set({ isPlaying: true })
+    }
   },
   setVolume: (volume) => {
     audioService.setVolume(volume)

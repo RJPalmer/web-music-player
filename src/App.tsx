@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { usePlayerStore } from './stores/usePlayerStore'
 import { useQueueStore } from './stores/useQueueStore'
+import { useKeyboardControls } from './hooks/useKeyboardControls'
 import { DropZone } from './components/DropZone'
 import { NowPlaying } from './components/NowPlaying'
 import { UploadButton } from './features/uploads/UploadButton'
@@ -33,7 +34,7 @@ function App() {
     artist: 'Local Artist'
   }
 ]
-
+  useKeyboardControls()
   useEffect(() => {
     // Load demo tracks into the queue on mount
     useQueueStore.getState().rehydrate()
