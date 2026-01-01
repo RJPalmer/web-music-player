@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { usePlayerStore } from './stores/usePlayerStore'
 import { useQueueStore } from './stores/useQueueStore'
 import { NowPlaying } from './components/NowPlaying'
+import { UploadButton } from './features/uploads/UploadButton'
 import { QueueList } from './components/QueueList'
 import { registerMediaSessionHandlers } from './services/mediaSession'
 import type { Track } from './types/Track'
@@ -42,7 +43,7 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
       <h1>Web Music Player</h1>
-
+      <UploadButton />
       <NowPlaying />
       <QueueList />
       <div style={{ height: 20 }} />

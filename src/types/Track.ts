@@ -7,4 +7,6 @@ export type Track = {
   album?: string
   duration?: number
   artwork?: string
+  source?: 'upload' | 'library'
+  available?: boolean
 }
