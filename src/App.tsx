@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { usePlayerStore } from './stores/usePlayerStore'
 import { useQueueStore } from './stores/useQueueStore'
 import { useKeyboardControls } from './hooks/useKeyboardControls'
 import { DropZone } from './components/DropZone'
@@ -13,7 +12,6 @@ import type { Track } from './types/Track'
 
 function App() {
 
-  const { isPlaying, play, pause } = usePlayerStore()
   const { setQueue } = useQueueStore()
   const demoTracks: Track[] = [
   {

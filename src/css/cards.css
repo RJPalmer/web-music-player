@@ -39,3 +39,7 @@
 .queue li:hover {
   background: rgba(0, 0, 0, 0.05);
 }
+
+.playback-controls input[type="range"]:last-child {
+  max-width: 160px;
+}
