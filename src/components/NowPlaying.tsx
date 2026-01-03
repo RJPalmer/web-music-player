@@ -19,51 +19,53 @@ const toggleRepeat = useQueueStore((state) => state.toggleRepeat)
   }
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-      {/* Artwork */}
-      {track.artwork && (
-        <img
-          src={track.artwork}
-          alt={`${track.title} artwork`}
-          width={64}
-          height={64}
-          style={{ objectFit: 'cover' }}
-        />
-      )}
+    <section className="card now-playing">
+      <div className="now-playing-content">
+        {/* Artwork */}
+        {track.artwork && (
+          <img
+            src={track.artwork}
+            alt={`${track.title} artwork`}
+            width={64}
+            height={64}
+            style={{ objectFit: 'cover' }}
+          />
+        )}
 
-      {/* Metadata */}
-      <div style={{ flex: 1 }}>
-        <div><strong>{track.title}</strong></div>
-        {track.artist && <div>{track.artist}</div>}
-        {track.album && <div>{track.album}</div>}
-      </div>
+        {/* Metadata */}
+        <div style={{ flex: 1 }}>
+          <div><strong>{track.title}</strong></div>
+          {track.artist && <div>{track.artist}</div>}
+          {track.album && <div>{track.album}</div>}
+        </div>
 
-      {/* Controls */}
-      <div style={{ display: 'flex', gap: 8 }}>
-        <button onClick={previous}>⏮</button>
-        <button onClick={isPlaying ? pause : play}>
-          {isPlaying ? '⏸' : '▶️'}
-        </button>
-        <button onClick={next}>⏭</button>
-      </div>
+        {/* Controls */}
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button onClick={previous}>⏮</button>
+          <button onClick={isPlaying ? pause : play}>
+            {isPlaying ? '⏸' : '▶️'}
+          </button>
+          <button onClick={next}>⏭</button>
+        </div>
+
+        <button
+      onClick={toggleShuffle}
+      style={{
+        border: shuffle ? '2px solid #000' : 'none'
+      }}
+    >
+      🔀
+    </button>
 
       <button
-  onClick={toggleShuffle}
-  style={{
-    border: shuffle ? '2px solid #000' : 'none'
-  }}
->
-  🔀
-</button>
-
-    <button
-  onClick={toggleRepeat}
-  style={{ fontWeight: repeat !== 'none' ? 'bold' : 'normal' }}
->
-  {repeat === 'none' && '🔁'}
-  {repeat === 'all' && '🔁'}
-  {repeat === 'one' && '🔂'}
-</button>
-    </div>
+      onClick={toggleRepeat}
+      style={{ fontWeight: repeat !== 'none' ? 'bold' : 'normal' }}
+    >
+      {repeat === 'none' && '🔁'}
+      {repeat === 'all' && '🔁'}
+      {repeat === 'one' && '🔂'}
+    </button>
+      </div>
+    </section>
   )
 }

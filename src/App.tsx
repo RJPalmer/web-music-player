@@ -4,6 +4,7 @@ import { useQueueStore } from './stores/useQueueStore'
 import { useKeyboardControls } from './hooks/useKeyboardControls'
 import { DropZone } from './components/DropZone'
 import { NowPlaying } from './components/NowPlaying'
+import { PlaybackControls } from './components/PlaybackControls'
 import { UploadButton } from './features/uploads/UploadButton'
 import { QueueList } from './components/QueueList'
 import { registerMediaSessionHandlers } from './services/mediaSession'
@@ -12,7 +13,7 @@ import type { Track } from './types/Track'
 
 function App() {
 
-  const { isPlaying, play, pause, currentTime, duration, seek, volume, setVolume } = usePlayerStore()
+  const { isPlaying, play, pause } = usePlayerStore()
   const { setQueue } = useQueueStore()
   const demoTracks: Track[] = [
   {
@@ -48,43 +49,18 @@ function App() {
         <h1>Web Music Player</h1>
         <UploadButton />
         <NowPlaying />
+        <PlaybackControls />
         <QueueList />
-      <div style={{ height: 20 }} />
-      <button onClick={isPlaying ? pause : play}>
-        {isPlaying ? 'Pause' : 'Play'}
-      </button> 
+        <div style={{ height: 20 }} />
 
-<button
-  onClick={() =>
-    setQueue(demoTracks)
-  }
->
-  Load Queue
-</button>
-      <div>
-        <label>Seek</label>
-        <input
-          type="range"
-          min={0}
-          max={duration}
-          step={1}
-          value={currentTime}
-          onChange={(e) => seek(Number(e.target.value))}
-        />
+        <button
+          onClick={() =>
+            setQueue(demoTracks)
+          }
+        >
+          Load Queue
+        </button>
       </div>
-      
-      <div>
-        <label>Volume</label>
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={(e) => setVolume(Number(e.target.value))}
-        />
-      </div>
-    </div>
     </DropZone>
   )
 }

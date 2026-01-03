@@ -1,0 +1,41 @@
+:root {
+  --card-bg: #ffffff;
+  --card-radius: 16px;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --card-padding: 1.25rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--card-padding);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.now-playing-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.queue-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.queue li {
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.queue li:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
