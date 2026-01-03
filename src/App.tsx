@@ -43,7 +43,7 @@ function App() {
 
   return (
     <DropZone>
-      <div style={{ padding: 20 }}>
+      <div className="player-layout">
         <h1>Web Music Player</h1>
         <UploadButton />
         <NowPlaying />

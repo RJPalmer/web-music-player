@@ -38,16 +38,17 @@ export function PlaybackControls() {
         <div className="playback-time">
           {formatTime(currentTime)} / {formatTime(duration)}
         </div>
-
-        <input
-          type="range"
-          aria-label="Volume"
-          min={0}
-          max={1}
-          step={0.01}
-          value={volume}
-          onChange={(e) => setVolume(Number(e.target.value))}
-        />
+        <div className="volume-row">
+          <input
+            type="range"
+            aria-label="Volume"
+            min={0}
+            max={1}
+            step={0.01}
+            value={volume}
+            onChange={(e) => setVolume(Number(e.target.value))}
+          />
+        </div>
       </div>
     </section>
   );
