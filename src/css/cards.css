@@ -18,7 +18,7 @@
     --card-bg-secondary: #2c2c2e;
     --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
     --card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.8);
-    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.2);
     --card-text: #f2f2f7;
     --card-muted-text: #a1a1a6;
     --card-hover-bg: rgba(255, 255, 255, 0.06);
